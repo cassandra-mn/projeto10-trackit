@@ -14,7 +14,7 @@ export default function TelaCadastro() {
             <Imput type='tex' required placeholder='nome'></Imput>
             <Imput type='text' required placeholder='foto'></Imput>
             
-            <Button>Cadastrar</Button>
+            <Button onClick={() => navigate('/')}>Cadastrar</Button>
             
             <Entrar onClick={() => navigate('/')}>Já tem uma conta? Faça login!</Entrar>
         </Container>

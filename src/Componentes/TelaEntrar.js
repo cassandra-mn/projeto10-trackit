@@ -12,7 +12,7 @@ export default function TelaEntrar() {
             <Imput type='email' required placeholder='email'></Imput>
             <Imput type='password' required placeholder='senha'></Imput>
             
-            <Button>Entrar</Button>
+            <Button onClick={() => navigate('/habitos')}>Entrar</Button>
             
             <Cadastrar onClick={() => navigate('/cadastro')}>Não tem uma conta? Cadastre-se!</Cadastrar>
         </Container>
