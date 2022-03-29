@@ -1,29 +1,33 @@
+import AdicionarHabito from './AdicionarHabito';
+import { useState } from 'react';
 import styled from 'styled-components';
 import { FaPlus } from "react-icons/fa";
 
 export default function TelaHabitos() {
-    return (
+    const [adicionar, setAdicionar] = useState(false);
+
+    return !adicionar ? (
         <Container>
             <Nav>
                 <H1>Meus hábitos</H1>
-                <Icon><FaPlus /></Icon>
+                <Icon onClick={() => setAdicionar(true)}><FaPlus /></Icon>
             </Nav>
             <Texto>
                 Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!
             </Texto>
         </Container>
-    );
+    ) : <AdicionarHabito />;
 }
 
-const Container = styled.div `
+const Container = styled.div`
     font-family: 'Lexend Deca';
 `;
 
-const Nav = styled.div `
+const Nav = styled.div`
     display: flex;
 `;
 
-const H1 = styled.h1 `
+const H1 = styled.h1`
     top: 98px; 
     left: 18px;
     font-size: 23px;
@@ -31,7 +35,7 @@ const H1 = styled.h1 `
     color: #126BA5;
 `;
 
-const Icon = styled.div `
+const Icon = styled.div`
     top: 92px;
     right: 18px;
     width: 40px;
@@ -50,7 +54,7 @@ const Icon = styled.div `
     }
 `;
 
-const Texto = styled.p `
+const Texto = styled.p`
     top: 155px;
     left: 18px;
     right: 20px;
