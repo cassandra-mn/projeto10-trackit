@@ -3,8 +3,9 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import { FaPlus } from "react-icons/fa";
 
-export default function TelaHabitos() {
+export default function TelaHabitos({mudarStatus}) {
     const [adicionar, setAdicionar] = useState(false);
+    mudarStatus(true);
 
     return !adicionar ? (
         <Container>
@@ -16,7 +17,7 @@ export default function TelaHabitos() {
                 Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!
             </Texto>
         </Container>
-    ) : <AdicionarHabito />;
+    ) : <AdicionarHabito mudarStatus={mudarStatus}/>;
 }
 
 const Container = styled.div`

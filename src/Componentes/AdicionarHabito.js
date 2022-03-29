@@ -3,7 +3,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import { FaPlus } from "react-icons/fa";
 
-export default function AdicionarHabito() {
+export default function AdicionarHabito({mudarStatus}) {
     const [cancelar, setCancelar] = useState(false);
     const [selecionados, setSelecionados] = useState([]);
     const diaSemana = ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'];
@@ -37,7 +37,7 @@ export default function AdicionarHabito() {
                 Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!
             </Texto>
         </Container>
-    ) : <TelaHabitos />;
+    ) : <TelaHabitos mudarStatus={mudarStatus}/>;
 }
 
 function back(selecionados, id) {

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
-export default function Footer() {
-    return (
+export default function Footer({status}) {
+    return status ? (
         <>
         <Container>
             <Habitos>Hábitos</Habitos>
@@ -9,7 +9,7 @@ export default function Footer() {
             <Historico>Histórico</Historico>
         </Container>
         </>
-    );
+    ) : <></>;
 }
 
 const Container = styled.div `

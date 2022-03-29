@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 import foto from './../assets/images/foto.png';
 
-export default function Header() {
-    return (
+export default function Header({status}) {
+    return status ? (
         <Container>
             <H1>TrackIt</H1>
             <Imagem src={foto}></Imagem>
         </Container>
-    );
+    ) : <></>;
 }
 
 const Container = styled.div `
