@@ -1,7 +1,10 @@
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import logo from './../assets/images/logo.svg';
 
 export default function TelaCadastro() {
+    const navigate = useNavigate();
+
     return (
         <Container>
             <Logo src={logo} alt='logo'></Logo>
@@ -13,7 +16,7 @@ export default function TelaCadastro() {
             
             <Button>Cadastrar</Button>
             
-            <Entrar>Já tem uma conta? Faça login!</Entrar>
+            <Entrar onClick={() => navigate('/')}>Já tem uma conta? Faça login!</Entrar>
         </Container>
     );
 }

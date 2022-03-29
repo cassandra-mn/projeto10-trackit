@@ -1,7 +1,10 @@
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import logo from './../assets/images/logo.svg';
 
 export default function TelaEntrar() {
+    const navigate = useNavigate();
+
     return (
         <Container>
             <Logo src={logo} alt='logo'></Logo>
@@ -11,7 +14,7 @@ export default function TelaEntrar() {
             
             <Button>Entrar</Button>
             
-            <Cadastrar>Não tem uma conta? Cadastre-se!</Cadastrar>
+            <Cadastrar onClick={() => navigate('/cadastro')}>Não tem uma conta? Cadastre-se!</Cadastrar>
         </Container>
     );
 }
