@@ -67,4 +67,8 @@ const Cadastrar = styled.div `
     font-family: 'Lexend Deca';
     text-decoration-line: underline;
     color: #52B6FF;
+
+    :hover {
+        cursor: pointer;
+    }
 `
