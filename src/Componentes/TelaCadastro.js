@@ -1,20 +1,32 @@
 import { useNavigate } from 'react-router-dom';
+import {useState} from 'react';
 import styled from 'styled-components';
 import logo from './../assets/images/logo.svg';
 
 export default function TelaCadastro() {
     const navigate = useNavigate();
+    const [dados, setDados] = useState({
+        email: '',
+        password: '',
+        nome: '',
+        foto: ''
+    });
+
+    function enviarDados() {
+        console.log(dados);
+        navigate('/');
+    }
 
     return (
         <Container>
             <Logo src={logo} alt='logo'></Logo>
 
-            <Imput type='email' required placeholder='email'></Imput>
-            <Imput type='password' required placeholder='senha'></Imput>
-            <Imput type='tex' required placeholder='nome'></Imput>
-            <Imput type='text' required placeholder='foto'></Imput>
+            <Imput type='email' required placeholder='email'  value={dados.email} onChange={e => setDados({...dados, email: e.target.value})}></Imput>
+            <Imput type='password' required placeholder='senha' value={dados.password} onChange={e => setDados({...dados, password: e.target.value})}></Imput>
+            <Imput type='tex' required placeholder='nome' value={dados.nome} onChange={e => setDados({...dados, nome: e.target.value})}></Imput>
+            <Imput type='url' required placeholder='foto' value={dados.foto} onChange={e => setDados({...dados, foto: e.target.value})}></Imput>
             
-            <Button onClick={() => navigate('/')}>Cadastrar</Button>
+            <Button onClick={() => enviarDados()}>Cadastrar</Button>
             
             <Entrar onClick={() => navigate('/')}>Já tem uma conta? Faça login!</Entrar>
         </Container>
