@@ -6,7 +6,7 @@ import AdicionarHabito from './AdicionarHabito';
 
 export default function TelaHabitos() {
     const [adicionar, setAdicionar] = useState(false);
-    const { setVisivel } = useContext(UserContext);
+    const { visivel, setVisivel } = useContext(UserContext);
     setVisivel(true);
 
     // Se já tiver hábitos, mostrar os hábitos, se não mostrar o texto

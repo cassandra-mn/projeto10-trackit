@@ -1,11 +1,13 @@
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import OtherContext from '../contexts/OtherContext';
 import axios from 'axios';
 import styled from 'styled-components';
 import logo from './../assets/images/logo.svg';
 
 export default function TelaEntrar() {
     const navigate = useNavigate();
+    const {dadosUsuario, setDadosUsuario} = useContext(OtherContext);
     const [dados, setDados] = useState({
         email: '',
         password: ''
@@ -15,10 +17,11 @@ export default function TelaEntrar() {
         const URL = 'https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login'; 
         const request = axios.post(URL, dados);
         request.then(response => {
-            console.log(response.data);
+            setDadosUsuario(response.data);
             navigate('/habitos');
         }).catch(error => alert(error.response.data.message));
     }
+    console.log(dadosUsuario);
 
     return (
         <Container>
