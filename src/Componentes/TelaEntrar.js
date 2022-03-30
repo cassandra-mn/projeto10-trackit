@@ -14,8 +14,10 @@ export default function TelaEntrar() {
     function entrar() {
         const URL = 'https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login'; 
         const request = axios.post(URL, dados);
-        request.then(response => navigate('/habitos'))
-        .catch(error => alert(error.response.data.message));
+        request.then(response => {
+            console.log(response.data);
+            navigate('/habitos');
+        }).catch(error => alert(error.response.data.message));
     }
 
     return (
@@ -25,7 +27,7 @@ export default function TelaEntrar() {
             <Imput type='email' required placeholder='email' value={dados.email} onChange={e => setDados({...dados, email: e.target.value})}></Imput>
             <Imput type='password' required placeholder='senha' value={dados.password} onChange={e => setDados({...dados, password: e.target.value})}></Imput>
             
-            <Button onClick={() => entrar()}>Entrar</Button>
+            <Button onClick={entrar}>Entrar</Button>
             
             <Cadastrar onClick={() => navigate('/cadastro')}>Não tem uma conta? Cadastre-se!</Cadastrar>
         </Container>

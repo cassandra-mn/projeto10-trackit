@@ -1,11 +1,15 @@
-import AdicionarHabito from './AdicionarHabito';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import UserContext from '../contexts/UserContext';
 import styled from 'styled-components';
 import { FaPlus } from "react-icons/fa";
+import AdicionarHabito from './AdicionarHabito';
 
-export default function TelaHabitos({mudarStatus}) {
+export default function TelaHabitos() {
     const [adicionar, setAdicionar] = useState(false);
-    mudarStatus(true);
+    const { setVisivel } = useContext(UserContext);
+    setVisivel(true);
+
+    // Se já tiver hábitos, mostrar os hábitos, se não mostrar o texto
 
     return !adicionar ? (
         <Container>
@@ -17,7 +21,7 @@ export default function TelaHabitos({mudarStatus}) {
                 Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!
             </Texto>
         </Container>
-    ) : <AdicionarHabito mudarStatus={mudarStatus}/>;
+    ) : <AdicionarHabito />;
 }
 
 const Container = styled.div`
@@ -25,20 +29,20 @@ const Container = styled.div`
 `;
 
 const Nav = styled.div`
+    font-family: 'Lexend Deca';
+    padding: 0 18px;
     display: flex;
+    justify-content: space-between;
 `;
 
 const H1 = styled.h1`
-    top: 98px; 
-    left: 18px;
+    margin-top: 28px; 
     font-size: 23px;
-    position: absolute;
     color: #126BA5;
 `;
 
 const Icon = styled.div`
-    top: 92px;
-    right: 18px;
+    margin-top: 21px;
     width: 40px;
     height: 35px;
     font-size: 27px;
@@ -46,7 +50,6 @@ const Icon = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    position: absolute;
     color: #FFFFFF;
     background: #52B6FF;
 
@@ -56,7 +59,7 @@ const Icon = styled.div`
 `;
 
 const Texto = styled.p`
-    top: 155px;
+    margin-top: 28px;
     left: 18px;
     right: 20px;
     font-size: 18px;

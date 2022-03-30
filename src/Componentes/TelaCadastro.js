@@ -29,7 +29,7 @@ export default function TelaCadastro() {
             <Imput type='tex' required placeholder='nome' value={dados.name} onChange={e => setDados({...dados, name: e.target.value})}></Imput>
             <Imput type='url' required placeholder='foto' value={dados.image} onChange={e => setDados({...dados, image: e.target.value})}></Imput>
             
-            <Button onClick={() => cadastrar()}>Cadastrar</Button>
+            <Button onClick={cadastrar}>Cadastrar</Button>
             
             <Entrar onClick={() => navigate('/')}>Já tem uma conta? Faça login!</Entrar>
         </Container>

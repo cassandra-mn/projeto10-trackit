@@ -1,14 +1,16 @@
+import { useContext } from 'react';
+import UserContext from '../contexts/UserContext';
 import styled from 'styled-components';
 
-export default function Footer({status}) {
-    return status ? (
-        <>
+export default function Footer() {
+    const {visivel} = useContext(UserContext);
+
+    return visivel ? (
         <Container>
             <Habitos>Hábitos</Habitos>
             <Hoje>Hoje</Hoje>
             <Historico>Histórico</Historico>
         </Container>
-        </>
     ) : <></>;
 }
 

@@ -1,9 +1,9 @@
 import TelaHabitos from './TelaHabitos';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import styled from 'styled-components';
 import { FaPlus } from "react-icons/fa";
 
-export default function AdicionarHabito({mudarStatus}) {
+export default function AdicionarHabito() {
     const [cancelar, setCancelar] = useState(false);
     const [selecionados, setSelecionados] = useState([]);
     const diaSemana = ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'];
@@ -33,11 +33,8 @@ export default function AdicionarHabito({mudarStatus}) {
                 <Cancelar onClick={() => setCancelar(true)}>Cancelar</Cancelar>
                 <Salvar>Salvar</Salvar>
             </Habito>
-            <Texto>
-                Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!
-            </Texto>
         </Container>
-    ) : <TelaHabitos mudarStatus={mudarStatus}/>;
+    ) : <TelaHabitos />;
 }
 
 function back(selecionados, id) {
@@ -55,20 +52,20 @@ const Container = styled.div`
 `;
 
 const Nav = styled.div`
+    font-family: 'Lexend Deca';
+    padding: 0 18px;
     display: flex;
+    justify-content: space-between;
 `;
 
 const H1 = styled.h1`
-    top: 98px; 
-    left: 18px;
+    margin-top: 28px; 
     font-size: 23px;
-    position: absolute;
     color: #126BA5;
 `;
 
 const Icon = styled.div`
-    top: 92px;
-    right: 18px;
+    margin-top: 21px;
     width: 40px;
     height: 35px;
     font-size: 27px;
@@ -76,7 +73,6 @@ const Icon = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    position: absolute;
     color: #FFFFFF;
     background: #52B6FF;
 
@@ -87,7 +83,7 @@ const Icon = styled.div`
 
 const Habito = styled.div`
     margin: 0 18px;
-    margin-top: 77px;
+    margin-top: 20px;
     min-width: 340px;
     height: 180px;
     border-radius: 5px;
@@ -130,8 +126,8 @@ const Dias = styled.div`
     justify-content: center;
     align-items: center;
     border: 1px solid #D5D5D5;
-    color: ${({selecionados, dia}) => cor(selecionados, dia)};
-    background-color: ${({selecionados, dia}) => back(selecionados, dia)};
+    color: ${({ selecionados, dia }) => cor(selecionados, dia)};
+    background-color: ${({ selecionados, dia }) => back(selecionados, dia)};
     
     :hover {
         cursor: pointer;
