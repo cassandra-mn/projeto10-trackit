@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
-import {useState} from 'react';
+import { useState } from 'react';
+import axios from 'axios';
 import styled from 'styled-components';
 import logo from './../assets/images/logo.svg';
 
@@ -7,14 +8,16 @@ export default function TelaCadastro() {
     const navigate = useNavigate();
     const [dados, setDados] = useState({
         email: '',
-        password: '',
-        nome: '',
-        foto: ''
+        name: '',
+        image: '',
+        password: ''
     });
 
-    function enviarDados() {
-        console.log(dados);
-        navigate('/');
+    function cadastrar() {
+        const URL = 'https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up';
+        const request = axios.post(URL, dados);
+        request.then(response => navigate('/'))
+        .catch(error => alert(error.response.data.message));
     }
 
     return (
@@ -23,10 +26,10 @@ export default function TelaCadastro() {
 
             <Imput type='email' required placeholder='email'  value={dados.email} onChange={e => setDados({...dados, email: e.target.value})}></Imput>
             <Imput type='password' required placeholder='senha' value={dados.password} onChange={e => setDados({...dados, password: e.target.value})}></Imput>
-            <Imput type='tex' required placeholder='nome' value={dados.nome} onChange={e => setDados({...dados, nome: e.target.value})}></Imput>
-            <Imput type='url' required placeholder='foto' value={dados.foto} onChange={e => setDados({...dados, foto: e.target.value})}></Imput>
+            <Imput type='tex' required placeholder='nome' value={dados.name} onChange={e => setDados({...dados, name: e.target.value})}></Imput>
+            <Imput type='url' required placeholder='foto' value={dados.image} onChange={e => setDados({...dados, image: e.target.value})}></Imput>
             
-            <Button onClick={() => enviarDados()}>Cadastrar</Button>
+            <Button onClick={() => cadastrar()}>Cadastrar</Button>
             
             <Entrar onClick={() => navigate('/')}>Já tem uma conta? Faça login!</Entrar>
         </Container>
