@@ -1,10 +1,15 @@
-import TelaHabitos from './TelaHabitos';
 import { useState, useContext } from 'react';
+import OtherContext from './../contexts/OtherContext';
+import TelaHabitos from './TelaHabitos';
 import styled from 'styled-components';
+import axios from 'axios';
 import { FaPlus } from "react-icons/fa";
 
 export default function AdicionarHabito() {
+    const { dadosUsuario, setDadosUsuario } = useContext(OtherContext);
+    const { token } = dadosUsuario;
     const [cancelar, setCancelar] = useState(false);
+    const [novoHabito, setNovoHabito] = useState('');
     const [selecionados, setSelecionados] = useState([]);
     const diaSemana = ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'];
 
@@ -17,24 +22,49 @@ export default function AdicionarHabito() {
         }
     }
 
-    return !cancelar ? (
-        <Container>
-            <Nav>
-                <H1>Meus hábitos</H1>
-                <Icon><FaPlus /></Icon>
-            </Nav>
-            <Habito>
-                <Input placeholder='nome do hábito'></Input>
-                <Selecao>
-                    {diaSemana.map((dia, id) => {
-                        return <Dias key={id} selecionados={selecionados} dia={id} onClick={() => selecionar(id)}>{dia}</Dias>
-                    })}
-                </Selecao>
-                <Cancelar onClick={() => setCancelar(true)}>Cancelar</Cancelar>
-                <Salvar>Salvar</Salvar>
-            </Habito>
-        </Container>
-    ) : <TelaHabitos />;
+    function criarHabito() {
+        const URL = 'https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits';
+        const dados = { 
+            name: novoHabito,
+            days: selecionados
+        }
+        const config = {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        }
+        setDadosUsuario({...dadosUsuario, dados});
+        const request = axios.post(URL, dados, config);
+        request.then(response => {
+            console.log(dados);
+            console.log(token);
+            console.log(dadosUsuario);
+        }).catch(error => alert(error.response.data.message));
+    }
+    
+    if (!cancelar) {
+        return (
+            <Container>
+                <Nav>
+                    <H1>Meus hábitos</H1>
+                    <Icon><FaPlus /></Icon>
+                </Nav>
+                <Habito>
+                    <Input placeholder='nome do hábito' required value={novoHabito} onChange={e => setNovoHabito(e.target.value)}></Input>
+                    <Selecao>
+                        {diaSemana.map((dia, id) => {
+                            return <Dias key={id} selecionados={selecionados} dia={id} onClick={() => selecionar(id)}>{dia}</Dias>
+                        })}
+                    </Selecao>
+                    <Cancelar onClick={() => setCancelar(true)}>Cancelar</Cancelar>
+                    <Salvar onClick={criarHabito}>Salvar</Salvar>
+                </Habito>
+            </Container>
+        );
+    }
+    else {
+        return <TelaHabitos />;
+    }
 }
 
 function back(selecionados, id) {

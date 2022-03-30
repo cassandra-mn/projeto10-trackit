@@ -1,14 +1,17 @@
 import { useState, useContext } from 'react';
 import UserContext from '../contexts/UserContext';
+import OtherContext from '../contexts/OtherContext';
 import styled from 'styled-components';
 import { FaPlus } from "react-icons/fa";
 import AdicionarHabito from './AdicionarHabito';
 
 export default function TelaHabitos() {
     const [adicionar, setAdicionar] = useState(false);
-    const { visivel, setVisivel } = useContext(UserContext);
+    const { setVisivel } = useContext(UserContext);
+    const { dadosUsuario } = useContext(OtherContext); 
     setVisivel(true);
 
+    console.log(dadosUsuario);
     // Se já tiver hábitos, mostrar os hábitos, se não mostrar o texto
 
     return !adicionar ? (
