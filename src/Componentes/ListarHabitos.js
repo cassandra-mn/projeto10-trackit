@@ -1,17 +1,37 @@
 import styled from 'styled-components';
+import axios from 'axios';
 import { FaRegTrashAlt } from "react-icons/fa";
+import { useNavigate } from 'react-router-dom';
 
-export default function ListarHabitos({ habitos }) {
+export default function ListarHabitos({ habitos, setHabitos }) {
     const diaSemana = ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'];
+    const token = localStorage.getItem('token');
+
+    function deletar(id) {
+        const config = {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }
+        const URL = `https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}`;
+        const confirm = window.confirm('Você realmente quer apagar o hábito?');
+        const request = null;
+
+        return confirm ? (
+            request = axios.delete(URL, config)
+            .then(response => window.location.reload())
+            .catch(error => console.log(error.response))
+        ) : "";
+    }
 
     return (
         <Container>
             {habitos.map(habito => {
-                const { days, name } = habito;
+                const { days, id, name } = habito;
                 return (
-                    <Habito key={habito}>
+                    <Habito key={id}>
                         <P>{name}</P>
-                        <Remover><FaRegTrashAlt /></Remover>
+                        <Remover onClick={() => deletar(id)}><FaRegTrashAlt /></Remover>
                         <Caixinhas>
                             {diaSemana.map((dia, id) => {
                                 const select = days.some(day => day === id);
@@ -52,6 +72,10 @@ const Remover = styled.p`
     right: 15px;
     font-size: 15px;
     position: absolute;
+
+    :hover {
+        cursor: pointer;
+    }
 `;
 
 const Caixinhas = styled.div`
