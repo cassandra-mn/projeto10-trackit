@@ -30,7 +30,7 @@ export default function AdicionarHabito() {
         }
         const config = {
             headers: {
-                'Authorization': `Bearer ${token}`
+                Authorization: `Bearer ${token}`
             }
         }
         setDadosUsuario({...dadosUsuario, dados});

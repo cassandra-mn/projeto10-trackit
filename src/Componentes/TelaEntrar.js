@@ -18,6 +18,7 @@ export default function TelaEntrar() {
         const request = axios.post(URL, dados);
         request.then(response => {
             setDadosUsuario(response.data);
+            localStorage.setItem('token',`${response.data.token}`);
             navigate('/habitos');
         }).catch(error => alert(error.response.data.message));
     }

@@ -1,18 +1,31 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import UserContext from '../contexts/UserContext';
-import OtherContext from '../contexts/OtherContext';
-import styled from 'styled-components';
-import { FaPlus } from "react-icons/fa";
 import AdicionarHabito from './AdicionarHabito';
+import ListarHabitos from './ListarHabitos';
+import styled from 'styled-components';
+import axios from 'axios';
+import { FaPlus } from "react-icons/fa";
 
 export default function TelaHabitos() {
-    const [adicionar, setAdicionar] = useState(false);
     const { setVisivel } = useContext(UserContext);
-    const { dadosUsuario } = useContext(OtherContext); 
+    const token = localStorage.getItem('token');
     setVisivel(true);
 
-    console.log(dadosUsuario);
-    // Se já tiver hábitos, mostrar os hábitos, se não mostrar o texto
+    const [adicionar, setAdicionar] = useState(false);
+    const [habitos, setHabitos] = useState();
+
+    useEffect(() => {
+        const URL = 'https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits';
+        const config = {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }
+        const promise = axios.get(URL, config);
+        promise.then(response => {
+            setHabitos(response.data);
+        }).catch(error => console.log(error.response));
+    }, []);
 
     return !adicionar ? (
         <Container>
@@ -20,11 +33,16 @@ export default function TelaHabitos() {
                 <H1>Meus hábitos</H1>
                 <Icon onClick={() => setAdicionar(true)}><FaPlus /></Icon>
             </Nav>
-            <Texto>
-                Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!
-            </Texto>
+
+            {habitos.length === 0 ? (
+                <Texto>
+                    Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!
+                </Texto>
+                ) : <ListarHabitos habitos={habitos}/>
+            }
         </Container>
-    ) : <AdicionarHabito />;
+    ) :
+    <AdicionarHabito />;
 }
 
 const Container = styled.div`
