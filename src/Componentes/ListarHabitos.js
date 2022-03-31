@@ -4,12 +4,13 @@ import { FaRegTrashAlt } from "react-icons/fa";
 
 export default function ListarHabitos({ habitos, setHabitos }) {
     const diaSemana = ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'];
-    const token = localStorage.getItem('token');
+    const pegarDados = localStorage.getItem("dados");
+    const novosDados = JSON.parse(pegarDados);
 
     function deletar(id) {
         const config = {
             headers: {
-                Authorization: `Bearer ${token}`
+                Authorization: `Bearer ${novosDados.token}`
             }
         }
         const URL = `https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}`;

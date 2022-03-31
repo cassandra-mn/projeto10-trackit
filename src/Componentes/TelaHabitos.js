@@ -8,7 +8,8 @@ import { FaPlus } from "react-icons/fa";
 
 export default function TelaHabitos() {
     const { setVisivel } = useContext(UserContext);
-    const token = localStorage.getItem('token');
+    const pegarDados = localStorage.getItem("dados");
+    const novosDados = JSON.parse(pegarDados);
     setVisivel(true);
 
     const [adicionar, setAdicionar] = useState(false);
@@ -19,7 +20,7 @@ export default function TelaHabitos() {
         const URL = 'https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits';
         const config = {
             headers: {
-                Authorization: `Bearer ${token}`
+                Authorization: `Bearer ${novosDados.token}`
             }
         }
         const promise = axios.get(URL, config);

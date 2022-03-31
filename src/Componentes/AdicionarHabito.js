@@ -7,7 +7,8 @@ import { FaPlus } from 'react-icons/fa';
 
 export default function AdicionarHabito() {
     const { dadosUsuario, setDadosUsuario } = useContext(OtherContext);
-    const token = localStorage.getItem('token');
+    const pegarDados = localStorage.getItem("dados");
+    const novosDados = JSON.parse(pegarDados);
     const [cancelar, setCancelar] = useState(false);
     const [novoHabito, setNovoHabito] = useState('');
     const [selecionados, setSelecionados] = useState([]);
@@ -30,7 +31,7 @@ export default function AdicionarHabito() {
         }
         const config = {
             headers: {
-                Authorization: `Bearer ${token}`
+                Authorization: `Bearer ${novosDados.token}`
             }
         }
         setDadosUsuario({...dadosUsuario, dados});
