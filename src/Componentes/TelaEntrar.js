@@ -16,14 +16,16 @@ export default function TelaEntrar() {
     function entrar() {
         const URL = 'https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login'; 
         const request = axios.post(URL, dados);
-        request.then(response => {
-            setDadosUsuario(response.data);
-            localStorage.setItem('token',`${response.data.token}`);
-            navigate('/hoje');
-        }).catch(error => alert(error.response.data.message));
+        request.then(response => setDadosUsuario(response.data))
+        .catch(error => alert(error.response.data.message));
     }
-    console.log(dadosUsuario);
-
+    
+    if (dadosUsuario !== undefined) {
+        const dadosSerializados = JSON.stringify(dadosUsuario);
+        localStorage.setItem("dados", dadosSerializados);
+        navigate('/hoje');
+    }
+    
     return (
         <Container>
             <Logo src={logo} alt='logo'></Logo>

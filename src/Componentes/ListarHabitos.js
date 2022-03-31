@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import axios from 'axios';
 import { FaRegTrashAlt } from "react-icons/fa";
-import { useNavigate } from 'react-router-dom';
 
 export default function ListarHabitos({ habitos, setHabitos }) {
     const diaSemana = ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'];

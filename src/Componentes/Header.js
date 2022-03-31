@@ -1,22 +1,21 @@
-import {useContext} from 'react';
+import { useContext } from 'react';
 import UserContext from '../contexts/UserContext';
-import OtherContext from '../contexts/OtherContext';
 import styled from 'styled-components';
 
 export default function Header() {
-    const {visivel} = useContext(UserContext);
-    // const {dadosUsuario} = useContext(OtherContext);
-    // const {image} = dadosUsuario;
-    
+    const { visivel } = useContext(UserContext);
+    const pegarDados = localStorage.getItem("dados");
+    const novosDados = JSON.parse(pegarDados);
+
     return visivel ? (
         <Container>
             <H1>TrackIt</H1>
-            <Imagem src={""}></Imagem>
+            <Imagem src={novosDados.image}></Imagem>
         </Container>
     ) : <></>;
 }
 
-const Container = styled.div `
+const Container = styled.div`
     top: 0;
     min-width: 375px;
     height: 70px;
@@ -26,7 +25,7 @@ const Container = styled.div `
     background-color: #126BA5;
 `;
 
-const H1 = styled.h1 `
+const H1 = styled.h1`
     left: 18px;
     top: 10px;
     font-size: 40px;
@@ -35,7 +34,7 @@ const H1 = styled.h1 `
     font-family: 'Playball';
 `;
 
-const Imagem = styled.img `
+const Imagem = styled.img`
     top: 9px;
     right: 10px;
     width: 51px;
