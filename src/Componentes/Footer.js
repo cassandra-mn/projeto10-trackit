@@ -1,15 +1,17 @@
 import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import UserContext from '../contexts/UserContext';
 import styled from 'styled-components';
 
 export default function Footer() {
     const {visivel} = useContext(UserContext);
+    const navigate = useNavigate();
 
     return visivel ? (
         <Container>
-            <Habitos>Hábitos</Habitos>
-            <Hoje>Hoje</Hoje>
-            <Historico>Histórico</Historico>
+            <Habitos onClick={() => navigate('/habitos')}>Hábitos</Habitos>
+            <Hoje onClick={() => navigate('/hoje')}>Hoje</Hoje>
+            <Historico onClick={() => navigate('/historico')}>Histórico</Historico>
         </Container>
     ) : <></>;
 }
@@ -31,6 +33,10 @@ const Container = styled.div `
 const Habitos = styled.p `
     font-size: 18px;
     color: #52b6ff;
+
+    :hover {
+        cursor: pointer;
+    }
 `;
 
 const Hoje = styled.div `
@@ -48,9 +54,17 @@ const Hoje = styled.div `
     position: fixed;
     color: #FFFFFF;
     background: #52B6FF;
+
+    :hover {
+        cursor: pointer;
+    }
 `;
 
 const Historico = styled.p `
     font-size: 18px;
     color: #52b6ff;
+
+    :hover {
+        cursor: pointer;
+    }
 `;

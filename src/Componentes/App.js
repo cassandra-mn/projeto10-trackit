@@ -22,9 +22,9 @@ export default function App() {
             <Footer/>
             <Routes>
                 <Route path="/" element={<TelaEntrar/>} />
-                {/* <Route path="/cadastro" element={<TelaCadastro />} />
-                <Route path="/habitos" element={<TelaHabitos />} /> */}
-                {/* <Route path="/hoje" element={<TelaHoje />} /> */}
+                <Route path="/cadastro" element={<TelaCadastro />} />
+                <Route path="/habitos" element={<TelaHabitos />} />
+                <Route path="/hoje" element={<TelaHoje />} />
                 <Route path="/historico" element={<TelaHistorico />} />
             </Routes>
         </BrowserRouter>

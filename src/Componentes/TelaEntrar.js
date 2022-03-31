@@ -19,7 +19,7 @@ export default function TelaEntrar() {
         request.then(response => {
             setDadosUsuario(response.data);
             localStorage.setItem('token',`${response.data.token}`);
-            navigate('/habitos');
+            navigate('/hoje');
         }).catch(error => alert(error.response.data.message));
     }
     console.log(dadosUsuario);
