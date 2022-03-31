@@ -3,7 +3,7 @@ import OtherContext from './../contexts/OtherContext';
 import TelaHabitos from './TelaHabitos';
 import styled from 'styled-components';
 import axios from 'axios';
-import { FaPlus } from "react-icons/fa";
+import { FaPlus } from 'react-icons/fa';
 
 export default function AdicionarHabito() {
     const { dadosUsuario, setDadosUsuario } = useContext(OtherContext);

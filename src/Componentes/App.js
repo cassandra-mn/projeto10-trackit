@@ -4,6 +4,7 @@ import UserContext from './../contexts/UserContext';
 import OtherContext from './../contexts/OtherContext';
 import TelaEntrar from './TelaEntrar';
 import TelaCadastro from './TelaCadastro';
+import TelaHoje from './TelaHoje';
 import TelaHabitos from './TelaHabitos';
 import Header from './Header';
 import Footer from './Footer';
@@ -20,8 +21,9 @@ export default function App() {
             <Footer/>
             <Routes>
                 <Route path="/" element={<TelaEntrar/>} />
-                <Route path="/cadastro" element={<TelaCadastro />} />
-                <Route path="/habitos" element={<TelaHabitos />} />
+                {/*<Route path="/cadastro" element={<TelaCadastro />} />
+                <Route path="/habitos" element={<TelaHabitos />} /> */}
+                <Route path='/hoje' element={<TelaHoje />} />
             </Routes>
         </BrowserRouter>
         </OtherContext.Provider>

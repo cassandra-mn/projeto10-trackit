@@ -5,13 +5,13 @@ import styled from 'styled-components';
 
 export default function Header() {
     const {visivel} = useContext(UserContext);
-    const {dadosUsuario} = useContext(OtherContext);
-    const {image} = dadosUsuario;
+    // const {dadosUsuario} = useContext(OtherContext);
+    // const {image} = dadosUsuario;
     
     return visivel ? (
         <Container>
             <H1>TrackIt</H1>
-            <Imagem src={image}></Imagem>
+            <Imagem src={""}></Imagem>
         </Container>
     ) : <></>;
 }
