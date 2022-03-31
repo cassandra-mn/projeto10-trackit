@@ -1,38 +1,64 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import UserContext from '../contexts/UserContext';
 import styled from 'styled-components';
+import axios from 'axios';
 import { FaCheckSquare } from 'react-icons/fa';
 
 export default function TelaHoje() {
     const dias = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'];
-    const {setVisivel} = useContext(UserContext);
+    const { setVisivel } = useContext(UserContext);
     const [concluidos, setConcluidos] = useState(false);
     const [select, setSelect] = useState(false);
+    const [habitos, setHabitos] = useState();
+    const pegarDados = localStorage.getItem("dados");
+    const novosDados = JSON.parse(pegarDados);
+    const [ok, setOk] = useState(false);
     const dayjs = require("dayjs");
     setVisivel(true);
-    
+
+    useEffect(() => {
+        const URL = 'https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today';
+        const config = {
+            headers: {
+                Authorization: `Bearer ${novosDados.token}`
+            }
+        }
+        const promise = axios.get(URL, config);
+        promise.then(response => {
+            setHabitos(response.data);
+            console.log(habitos);
+            setOk(true);
+        }).catch(error => console.log(error.response));
+    }, []);
+
     function mudarStatus() {
         setSelect(!select);
         setConcluidos(!concluidos);
     }
 
-    return (
+    return ok ? (
         <Container>
             <Header>
                 <H1>{dias[dayjs().day()]}, {dayjs().format('DD/MM')}</H1>
                 {concluidos ?
                     <Small>67% dos hábitos concluídos</Small>
-                :   <H3>Nenhum hábito concluído ainda</H3>
+                    : <H3>Nenhum hábito concluído ainda</H3>
                 }
             </Header>
-            <Habitos>
-                <H2>Ler 1 capítulo de livro</H2>
-                <P>Sequência atual: 3 dias</P>
-                <P>Seu recorde: 5 dias</P>
-                <Concluir onClick={mudarStatus} cor={select ? '#8FC549' : '#EBEBEB'}><FaCheckSquare /></Concluir>
-            </Habitos>
+            {habitos.map(habito => {
+                const {name, currentSequence, highestSequence} = habito;
+                console.log(habito);
+                return (
+                    <Habitos>
+                        <H2>{name}</H2>
+                        <P>Sequência atual: {currentSequence} dias</P>
+                        <P>Seu recorde: {highestSequence} dias</P>
+                        <Concluir onClick={mudarStatus} cor={select ? '#8FC549' : '#EBEBEB'}><FaCheckSquare /></Concluir>
+                    </Habitos>
+                );
+            })}
         </Container>
-    );
+    ) : <h1>Carregando...</h1>;
 }
 
 const Container = styled.div`
