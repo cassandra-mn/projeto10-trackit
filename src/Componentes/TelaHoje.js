@@ -8,11 +8,10 @@ export default function TelaHoje() {
     const dias = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'];
     const { setVisivel } = useContext(UserContext);
     const [concluidos, setConcluidos] = useState(false);
-    const [select, setSelect] = useState(false);
     const [habitos, setHabitos] = useState();
+    const [ok, setOk] = useState(false);
     const pegarDados = localStorage.getItem("dados");
     const novosDados = JSON.parse(pegarDados);
-    const [ok, setOk] = useState(false);
     const dayjs = require("dayjs");
     setVisivel(true);
 
@@ -26,14 +25,21 @@ export default function TelaHoje() {
         const promise = axios.get(URL, config);
         promise.then(response => {
             setHabitos(response.data);
-            console.log(habitos);
             setOk(true);
         }).catch(error => console.log(error.response));
     }, []);
 
-    function mudarStatus() {
-        setSelect(!select);
-        setConcluidos(!concluidos);
+    function mudarStatus(id) {
+        // setConcluidos(!concluidos);
+        const URL = `https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}/check`;
+        const config = {
+            headers: {
+                Authorization: `Bearer ${novosDados.token}`
+            }
+        }
+        const promise = axios.post(URL, {id}, config);
+        promise.then(response => window.location.reload())
+        .catch(error => console.log(error.response));
     }
 
     return ok ? (
@@ -46,14 +52,13 @@ export default function TelaHoje() {
                 }
             </Header>
             {habitos.map(habito => {
-                const {name, currentSequence, highestSequence} = habito;
-                console.log(habito);
+                const {id, name, done, currentSequence, highestSequence} = habito;
                 return (
-                    <Habitos>
+                    <Habitos key={id}>
                         <H2>{name}</H2>
                         <P>Sequência atual: {currentSequence} dias</P>
                         <P>Seu recorde: {highestSequence} dias</P>
-                        <Concluir onClick={mudarStatus} cor={select ? '#8FC549' : '#EBEBEB'}><FaCheckSquare /></Concluir>
+                        <Concluir onClick={() => mudarStatus(id)} cor={done ? '#8FC549' : '#EBEBEB'}><FaCheckSquare /></Concluir>
                     </Habitos>
                 );
             })}
