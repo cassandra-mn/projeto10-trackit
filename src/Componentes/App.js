@@ -6,6 +6,7 @@ import TelaEntrar from './TelaEntrar';
 import TelaCadastro from './TelaCadastro';
 import TelaHoje from './TelaHoje';
 import TelaHabitos from './TelaHabitos';
+import TelaHistorico from './TelaHistorico';
 import Header from './Header';
 import Footer from './Footer';
 
@@ -21,9 +22,10 @@ export default function App() {
             <Footer/>
             <Routes>
                 <Route path="/" element={<TelaEntrar/>} />
-                {/*<Route path="/cadastro" element={<TelaCadastro />} />
+                {/* <Route path="/cadastro" element={<TelaCadastro />} />
                 <Route path="/habitos" element={<TelaHabitos />} /> */}
-                <Route path='/hoje' element={<TelaHoje />} />
+                {/* <Route path="/hoje" element={<TelaHoje />} /> */}
+                <Route path="/historico" element={<TelaHistorico />} />
             </Routes>
         </BrowserRouter>
         </OtherContext.Provider>
