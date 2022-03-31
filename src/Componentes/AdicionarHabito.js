@@ -7,7 +7,7 @@ import { FaPlus } from "react-icons/fa";
 
 export default function AdicionarHabito() {
     const { dadosUsuario, setDadosUsuario } = useContext(OtherContext);
-    const { token } = dadosUsuario;
+    const token = localStorage.getItem('token');
     const [cancelar, setCancelar] = useState(false);
     const [novoHabito, setNovoHabito] = useState('');
     const [selecionados, setSelecionados] = useState([]);
@@ -35,11 +35,8 @@ export default function AdicionarHabito() {
         }
         setDadosUsuario({...dadosUsuario, dados});
         const request = axios.post(URL, dados, config);
-        request.then(response => {
-            console.log(dados);
-            console.log(token);
-            console.log(dadosUsuario);
-        }).catch(error => alert(error.response.data.message));
+        request.then(response => setCancelar(true))
+        .catch(error => alert(error.response.data.message));
     }
     
     if (!cancelar) {

@@ -20,12 +20,13 @@ const Container = styled.div `
     width: 100%;
     height: 70px;
     padding: 25px;
+    z-index: 1;
     position: fixed;
     display: flex;
     justify-content: space-between;
     font-family: 'Lexend Deca';
     background-color: #FFFFFF;
-    `;
+`;
 
 const Habitos = styled.p `
     font-size: 18px;

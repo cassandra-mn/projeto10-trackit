@@ -18,6 +18,7 @@ const Container = styled.div `
     top: 0;
     min-width: 375px;
     height: 70px;
+    z-index: 1;
     position: sticky;
     display: flex;
     background-color: #126BA5;

@@ -13,6 +13,7 @@ export default function TelaHabitos() {
 
     const [adicionar, setAdicionar] = useState(false);
     const [habitos, setHabitos] = useState();
+    const [ok, setOk] = useState(false);
 
     useEffect(() => {
         const URL = 'https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits';
@@ -24,10 +25,12 @@ export default function TelaHabitos() {
         const promise = axios.get(URL, config);
         promise.then(response => {
             setHabitos(response.data);
+            setOk(true);
         }).catch(error => console.log(error.response));
     }, []);
 
     return !adicionar ? (
+        ok ? ( 
         <Container>
             <Nav>
                 <H1>Meus hábitos</H1>
@@ -41,12 +44,14 @@ export default function TelaHabitos() {
                 ) : <ListarHabitos habitos={habitos}/>
             }
         </Container>
+        ) : <h1>Carregando...</h1>
     ) :
-    <AdicionarHabito />;
+    <AdicionarHabito />
 }
 
 const Container = styled.div`
     font-family: 'Lexend Deca';
+    margin-bottom: 100px;
 `;
 
 const Nav = styled.div`
