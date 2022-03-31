@@ -4,11 +4,13 @@ import styled from 'styled-components';
 import { FaCheckSquare } from 'react-icons/fa';
 
 export default function TelaHoje() {
+    const dias = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'];
     const {setVisivel} = useContext(UserContext);
     const [concluidos, setConcluidos] = useState(false);
     const [select, setSelect] = useState(false);
+    const dayjs = require("dayjs");
     setVisivel(true);
-
+    
     function mudarStatus() {
         setSelect(!select);
         setConcluidos(!concluidos);
@@ -17,7 +19,7 @@ export default function TelaHoje() {
     return (
         <Container>
             <Header>
-                <H1>Segunda, 17/05</H1>
+                <H1>{dias[dayjs().day()]}, {dayjs().format('DD/MM')}</H1>
                 {concluidos ?
                     <Small>67% dos hábitos concluídos</Small>
                 :   <H3>Nenhum hábito concluído ainda</H3>
