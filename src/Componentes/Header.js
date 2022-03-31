@@ -1,15 +1,17 @@
 import {useContext} from 'react';
 import UserContext from '../contexts/UserContext';
+import OtherContext from '../contexts/OtherContext';
 import styled from 'styled-components';
-import foto from './../assets/images/foto.png';
 
 export default function Header() {
     const {visivel} = useContext(UserContext);
+    const {dadosUsuario} = useContext(OtherContext);
+    const {image} = dadosUsuario;
     
     return visivel ? (
         <Container>
             <H1>TrackIt</H1>
-            <Imagem src={foto}></Imagem>
+            <Imagem src={image}></Imagem>
         </Container>
     ) : <></>;
 }
