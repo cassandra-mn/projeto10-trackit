@@ -29,17 +29,29 @@ export default function TelaHoje() {
         }).catch(error => console.log(error.response));
     }, []);
 
-    function mudarStatus(id) {
-        // setConcluidos(!concluidos);
-        const URL = `https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}/check`;
-        const config = {
-            headers: {
-                Authorization: `Bearer ${novosDados.token}`
+    function mudarStatus(id, done) {
+        if (done) {
+            const URL = `https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}/uncheck`;
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${novosDados.token}`
+                }
             }
+            const promise = axios.post(URL, {id}, config);
+            promise.then(response => window.location.reload())
+            .catch(error => console.log(error.response));
         }
-        const promise = axios.post(URL, {id}, config);
-        promise.then(response => window.location.reload())
-        .catch(error => console.log(error.response));
+        else {
+            const URL = `https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}/check`;
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${novosDados.token}`
+                }
+            }
+            const promise = axios.post(URL, {id}, config);
+            promise.then(response => window.location.reload())
+            .catch(error => console.log(error.response));
+        }
     }
 
     return ok ? (
@@ -53,12 +65,13 @@ export default function TelaHoje() {
             </Header>
             {habitos.map(habito => {
                 const {id, name, done, currentSequence, highestSequence} = habito;
+                
                 return (
                     <Habitos key={id}>
                         <H2>{name}</H2>
                         <P>Sequência atual: {currentSequence} dias</P>
                         <P>Seu recorde: {highestSequence} dias</P>
-                        <Concluir onClick={() => mudarStatus(id)} cor={done ? '#8FC549' : '#EBEBEB'}><FaCheckSquare /></Concluir>
+                        <Concluir onClick={() => mudarStatus(id, done)} cor={done ? '#8FC549' : '#EBEBEB'}><FaCheckSquare /></Concluir>
                     </Habitos>
                 );
             })}
