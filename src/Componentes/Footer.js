@@ -15,18 +15,26 @@ export default function Footer() {
 
     return visivel ? (
         habitos !== undefined && progresso !== undefined ? (
-        <Container>
-            <Habitos onClick={() => navigate('/habitos')}>Hábitos</Habitos>
-            <Hoje onClick={() => navigate('/hoje')}>
-                Hoje
-                <Progresso>
-                    <CircularProgressbar value={progresso.length / habitos.length} maxValue={1} 
-                    styles={buildStyles({pathColor:'#FFFFFF', trailColor: '#52B6FF'})}/>
-                </Progresso>
-            </Hoje>
-            <Historico onClick={() => navigate('/historico')}>Histórico</Historico>
-        </Container>
-        ) : <></>
+            <Container>
+                <Habitos onClick={() => navigate('/habitos')}>Hábitos</Habitos>
+                <Hoje onClick={() => navigate('/hoje')}>
+                    Hoje
+                    <Progresso>
+                        <CircularProgressbar value={progresso.length / habitos.length} maxValue={1}
+                            styles={buildStyles({ pathColor: '#FFFFFF', trailColor: '#52B6FF' })} />
+                    </Progresso>
+                </Hoje>
+                <Historico onClick={() => navigate('/historico')}>Histórico</Historico>
+            </Container>
+        ) : (
+            <Container>
+                <Habitos onClick={() => navigate('/habitos')}>Hábitos</Habitos>
+                <Hoje onClick={() => navigate('/hoje')}>
+                    Hoje
+                </Hoje>
+                <Historico onClick={() => navigate('/historico')}>Histórico</Historico>
+            </Container>
+        )
     ) : <></>;
 }
 

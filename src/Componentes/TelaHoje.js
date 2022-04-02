@@ -40,9 +40,9 @@ export default function TelaHoje() {
                     Authorization: `Bearer ${novosDados.token}`
                 }
             }
-            const promise = axios.post(URL, {id}, config);
+            const promise = axios.post(URL, { id }, config);
             promise.then(response => window.location.reload())
-            .catch(error => console.log(error.response));
+                .catch(error => console.log(error.response));
         }
         else {
             const URL = `https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}/check`;
@@ -51,9 +51,9 @@ export default function TelaHoje() {
                     Authorization: `Bearer ${novosDados.token}`
                 }
             }
-            const promise = axios.post(URL, {id}, config);
+            const promise = axios.post(URL, { id }, config);
             promise.then(response => window.location.reload())
-            .catch(error => console.log(error.response));
+                .catch(error => console.log(error.response));
         }
     }
 
@@ -67,19 +67,26 @@ export default function TelaHoje() {
                 }
             </Header>
             {habitos.map(habito => {
-                const {id, name, done, currentSequence, highestSequence} = habito;
-
-                return (
+                const { id, name, done, currentSequence, highestSequence } = habito;
+                
+                return currentSequence === highestSequence ? (
+                    <Habitos key={id}>
+                        <H2>{name}</H2>
+                        <P>Sequência atual: <Strong>{currentSequence} dias</Strong></P>
+                        <P>Seu recorde: <Strong>{highestSequence} dias</Strong></P>
+                        <Concluir onClick={() => mudarStatus(id, done)} cor={done ? '#8FC549' : '#EBEBEB'}><FaCheckSquare /></Concluir>
+                    </Habitos>
+                ) : (
                     <Habitos key={id}>
                         <H2>{name}</H2>
                         <P>Sequência atual: {currentSequence} dias</P>
-                        <P>Seu recorde: <Strong cor = {currentSequence === highestSequence ? '#8FC549' : '#666666'}>{highestSequence} dias</Strong></P>
+                        <P>Seu recorde: {highestSequence} dias</P>
                         <Concluir onClick={() => mudarStatus(id, done)} cor={done ? '#8FC549' : '#EBEBEB'}><FaCheckSquare /></Concluir>
                     </Habitos>
                 );
             })}
         </Container>
-    ) : <h1>Carregando...</h1>;
+    ) : <h1>Carregando...</h1>
 }
 
 const Container = styled.div`
@@ -139,7 +146,7 @@ const P = styled.p`
 `;
 
 const Strong = styled.strong`
-    color: ${props => props.cor};
+    color: #8FC549;
 `;
 
 const Concluir = styled.p`
