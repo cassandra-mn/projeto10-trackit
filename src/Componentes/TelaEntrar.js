@@ -1,17 +1,17 @@
+import { ThreeDots } from 'react-loader-spinner';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
-import { ThreeDots } from 'react-loader-spinner';
 import logo from './../assets/images/logo.svg';
 
 export default function TelaEntrar() {
     const navigate = useNavigate();
+    const [disable, setDisable] = useState(false);
     const [dados, setDados] = useState({
         email: '',
         password: ''
     });
-    const [disable, setDisable] = useState(false);
 
     function entrar() {
         const URL = 'https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login';
@@ -99,7 +99,6 @@ const ButtonDisable = styled.button`
     display: flex;
     justify-content: center;
     align-items: center;
-    /* text-align: center; */
     border: none;
     color: #FFFFFF;
     background: #52B6FF;
