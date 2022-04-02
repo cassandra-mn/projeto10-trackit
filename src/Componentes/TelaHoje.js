@@ -73,7 +73,7 @@ export default function TelaHoje() {
                     <Habitos key={id}>
                         <H2>{name}</H2>
                         <P>Sequência atual: {currentSequence} dias</P>
-                        <P>Seu recorde: {highestSequence} dias</P>
+                        <P>Seu recorde: <Strong cor = {currentSequence === highestSequence ? '#8FC549' : '#666666'}>{highestSequence} dias</Strong></P>
                         <Concluir onClick={() => mudarStatus(id, done)} cor={done ? '#8FC549' : '#EBEBEB'}><FaCheckSquare /></Concluir>
                     </Habitos>
                 );
@@ -136,6 +136,10 @@ const P = styled.p`
     font-size: 13px;
     line-height: 16px;
     color: #666666;
+`;
+
+const Strong = styled.strong`
+    color: ${props => props.cor};
 `;
 
 const Concluir = styled.p`
