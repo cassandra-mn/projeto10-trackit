@@ -1,5 +1,7 @@
 import { useState, useContext, useEffect } from 'react';
 import UserContext from '../contexts/UserContext';
+import HabitesContext from '../contexts/HabitesContext';
+import ProgressContext from '../contexts/ProgressContext';
 import styled from 'styled-components';
 import axios from 'axios';
 import { FaCheckSquare } from 'react-icons/fa';
@@ -7,8 +9,8 @@ import { FaCheckSquare } from 'react-icons/fa';
 export default function TelaHoje() {
     const dias = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'];
     const { setVisivel } = useContext(UserContext);
-    const [concluidos, setConcluidos] = useState(false);
-    const [habitos, setHabitos] = useState();
+    const { progresso, setProgresso } = useContext(ProgressContext);
+    const { habitos, setHabitos } = useContext(HabitesContext);
     const [ok, setOk] = useState(false);
     const pegarDados = localStorage.getItem("dados");
     const novosDados = JSON.parse(pegarDados);
@@ -25,6 +27,7 @@ export default function TelaHoje() {
         const promise = axios.get(URL, config);
         promise.then(response => {
             setHabitos(response.data);
+            setProgresso(response.data.filter(response => response.done));
             setOk(true);
         }).catch(error => console.log(error.response));
     }, []);
@@ -58,14 +61,14 @@ export default function TelaHoje() {
         <Container>
             <Header>
                 <H1>{dias[dayjs().day()]}, {dayjs().format('DD/MM')}</H1>
-                {concluidos ?
-                    <Small>67% dos hábitos concluídos</Small>
+                {progresso.length > 0 ?
+                    <Small>{(progresso.length / habitos.length * 100).toFixed(0)}% dos hábitos concluídos</Small>
                     : <H3>Nenhum hábito concluído ainda</H3>
                 }
             </Header>
             {habitos.map(habito => {
                 const {id, name, done, currentSequence, highestSequence} = habito;
-                
+
                 return (
                     <Habitos key={id}>
                         <H2>{name}</H2>
