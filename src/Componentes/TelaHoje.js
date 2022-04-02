@@ -1,10 +1,10 @@
 import { useState, useContext, useEffect } from 'react';
+import { FaCheckSquare } from 'react-icons/fa';
 import UserContext from '../contexts/UserContext';
 import HabitesContext from '../contexts/HabitesContext';
 import ProgressContext from '../contexts/ProgressContext';
 import styled from 'styled-components';
 import axios from 'axios';
-import { FaCheckSquare } from 'react-icons/fa';
 
 export default function TelaHoje() {
     const dias = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'];

@@ -4,8 +4,8 @@ import { useContext } from 'react';
 import UserContext from '../contexts/UserContext';
 import HabitesContext from '../contexts/HabitesContext';
 import ProgressContext from '../contexts/ProgressContext';
-import 'react-circular-progressbar/dist/styles.css';
 import styled from 'styled-components';
+import 'react-circular-progressbar/dist/styles.css';
 
 export default function Footer() {
     const { visivel } = useContext(UserContext);

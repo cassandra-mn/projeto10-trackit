@@ -1,13 +1,11 @@
 import { useNavigate } from 'react-router-dom';
-import { useState, useContext } from 'react';
-import OtherContext from '../contexts/OtherContext';
+import { useState } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import logo from './../assets/images/logo.svg';
 
 export default function TelaEntrar() {
     const navigate = useNavigate();
-    const { dadosUsuario, setDadosUsuario } = useContext(OtherContext);
     const [dados, setDados] = useState({
         email: '',
         password: ''

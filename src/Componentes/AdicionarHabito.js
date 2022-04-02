@@ -1,15 +1,12 @@
 import { useState, useContext } from 'react';
 import OtherContext from './../contexts/OtherContext';
-import TelaHabitos from './TelaHabitos';
 import styled from 'styled-components';
 import axios from 'axios';
-import { FaPlus } from 'react-icons/fa';
 
-export default function AdicionarHabito() {
+export default function AdicionarHabito({status}) {
     const { dadosUsuario, setDadosUsuario } = useContext(OtherContext);
     const pegarDados = localStorage.getItem("dados");
     const novosDados = JSON.parse(pegarDados);
-    const [cancelar, setCancelar] = useState(false);
     const [novoHabito, setNovoHabito] = useState('');
     const [selecionados, setSelecionados] = useState([]);
     const diaSemana = ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'];
@@ -25,7 +22,7 @@ export default function AdicionarHabito() {
 
     function criarHabito() {
         const URL = 'https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits';
-        const dados = { 
+        const dados = {
             name: novoHabito,
             days: selecionados
         }
@@ -34,35 +31,26 @@ export default function AdicionarHabito() {
                 Authorization: `Bearer ${novosDados.token}`
             }
         }
-        setDadosUsuario({...dadosUsuario, dados});
+        setDadosUsuario({ ...dadosUsuario, dados });
         const request = axios.post(URL, dados, config);
-        request.then(response => setCancelar(true))
-        .catch(error => alert(error.response.data.message));
+        request.then(response => {})
+            .catch(error => alert(error.response.data.message));
     }
-    
-    if (!cancelar) {
-        return (
-            <Container>
-                <Nav>
-                    <H1>Meus hábitos</H1>
-                    <Icon><FaPlus /></Icon>
-                </Nav>
-                <Habito>
-                    <Input placeholder='nome do hábito' required value={novoHabito} onChange={e => setNovoHabito(e.target.value)}></Input>
-                    <Selecao>
-                        {diaSemana.map((dia, id) => {
-                            return <Dias key={id} selecionados={selecionados} dia={id} onClick={() => selecionar(id)}>{dia}</Dias>
-                        })}
-                    </Selecao>
-                    <Cancelar onClick={() => setCancelar(true)}>Cancelar</Cancelar>
-                    <Salvar onClick={criarHabito}>Salvar</Salvar>
-                </Habito>
-            </Container>
-        );
-    }
-    else {
-        return <TelaHabitos />;
-    }
+
+    return (
+        <Container>
+            <Habito>
+                <Input placeholder='nome do hábito' required value={novoHabito} onChange={e => setNovoHabito(e.target.value)}></Input>
+                <Selecao>
+                    {diaSemana.map((dia, id) => {
+                        return <Dias key={id} selecionados={selecionados} dia={id} onClick={() => selecionar(id)}>{dia}</Dias>
+                    })}
+                </Selecao>
+                <Cancelar onClick={() => status(false)}>Cancelar</Cancelar>
+                <Salvar onClick={criarHabito}>Salvar</Salvar>
+            </Habito>
+        </Container>
+    );
 }
 
 function back(selecionados, id) {
@@ -77,36 +65,6 @@ function cor(selecionados, id) {
 
 const Container = styled.div`
     font-family: 'Lexend Deca';
-`;
-
-const Nav = styled.div`
-    font-family: 'Lexend Deca';
-    padding: 0 18px;
-    display: flex;
-    justify-content: space-between;
-`;
-
-const H1 = styled.h1`
-    margin-top: 28px; 
-    font-size: 23px;
-    color: #126BA5;
-`;
-
-const Icon = styled.div`
-    margin-top: 21px;
-    width: 40px;
-    height: 35px;
-    font-size: 27px;
-    border-radius: 5px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #FFFFFF;
-    background: #52B6FF;
-
-    :hover {
-        cursor: pointer;
-    }
 `;
 
 const Habito = styled.div`
@@ -191,14 +149,4 @@ const Salvar = styled.div`
     :hover {
         cursor: pointer 
     }
-`;
-
-const Texto = styled.p`
-    margin: 0 18px;
-    margin-top: 30px;
-    left: 18px;
-    right: 20px;
-    font-size: 18px;
-    line-height: 22px;
-    color: #666666;
 `;

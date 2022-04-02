@@ -30,13 +30,13 @@ export default function TelaHabitos() {
         }).catch(error => console.log(error.response));
     }, []);
 
-    return !adicionar ? (
-        ok ? ( 
+    return ok ? (
         <Container>
             <Nav>
                 <H1>Meus hábitos</H1>
                 <Icon onClick={() => setAdicionar(true)}><FaPlus /></Icon>
             </Nav>
+            {adicionar ? <AdicionarHabito status={status => setAdicionar(status)}/> : ''}
 
             {habitos.length === 0 ? (
                 <Texto>
@@ -46,8 +46,6 @@ export default function TelaHabitos() {
             }
         </Container>
         ) : <h1>Carregando...</h1>
-    ) :
-    <AdicionarHabito />
 }
 
 const Container = styled.div`
