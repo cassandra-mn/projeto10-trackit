@@ -9,6 +9,7 @@ import TelaCadastro from './TelaCadastro';
 import TelaHoje from './TelaHoje';
 import TelaHabitos from './TelaHabitos';
 import TelaHistorico from './TelaHistorico';
+import Teste from './Teste';
 import Header from './Header';
 import Footer from './Footer';
 
@@ -33,6 +34,7 @@ export default function App() {
                 <Route path="/hoje" element={<TelaHoje />} />
                 <Route path="/historico" element={<TelaHistorico />} />
             </Routes>
+            {/* <Teste /> */}
         </BrowserRouter>
         </HabitesContext.Provider>
         </ProgressContext.Provider>
