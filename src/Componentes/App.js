@@ -9,6 +9,7 @@ import TelaCadastro from './TelaCadastro';
 import TelaHoje from './TelaHoje';
 import TelaHabitos from './TelaHabitos';
 import TelaHistorico from './TelaHistorico';
+import Loading from './Loading';
 import Header from './Header';
 import Footer from './Footer';
 

@@ -3,6 +3,7 @@ import { FaCheckSquare } from 'react-icons/fa';
 import UserContext from '../contexts/UserContext';
 import HabitesContext from '../contexts/HabitesContext';
 import ProgressContext from '../contexts/ProgressContext';
+import Loading from './Loading';
 import styled from 'styled-components';
 import axios from 'axios';
 
@@ -86,7 +87,7 @@ export default function TelaHoje() {
                 );
             })}
         </Container>
-    ) : <h1>Carregando...</h1>
+    ) : <Loading />
 }
 
 const Container = styled.div`
