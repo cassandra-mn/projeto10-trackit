@@ -2,8 +2,8 @@ import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import {useState} from 'react';
 import UserContext from './../contexts/UserContext';
 import OtherContext from './../contexts/OtherContext';
-import ProgressContext from './../contexts/ProgressContext';
 import HabitesContext from './../contexts/HabitesContext';
+import ProgressContext from './../contexts/ProgressContext';
 import TelaEntrar from './TelaEntrar';
 import TelaCadastro from './TelaCadastro';
 import TelaHoje from './TelaHoje';
@@ -12,6 +12,7 @@ import TelaHistorico from './TelaHistorico';
 import Loading from './Loading';
 import Header from './Header';
 import Footer from './Footer';
+import 'react-calendar/dist/Calendar.css';
 
 export default function App() {
     const [visivel, setVisivel] = useState(false);

@@ -1,11 +1,11 @@
 import { useState, useContext, useEffect } from 'react';
+import { FaPlus } from "react-icons/fa";
 import UserContext from '../contexts/UserContext';
 import AdicionarHabito from './AdicionarHabito';
 import ListarHabitos from './ListarHabitos';
-import Loading from './Loading';
 import styled from 'styled-components';
+import Loading from './Loading';
 import axios from 'axios';
-import { FaPlus } from "react-icons/fa";
 
 export default function TelaHabitos() {
     const { setVisivel } = useContext(UserContext);

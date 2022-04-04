@@ -1,10 +1,10 @@
 import styled from 'styled-components';
-import { BallTriangle	 } from 'react-loader-spinner';
+import { BallTriangle } from 'react-loader-spinner';
 
 export default function Loading() {
     return (
         <Container>
-            <BallTriangle	 color='#FFFFFF'/>
+            <BallTriangle color='#FFFFFF'/>
         </Container>
     );
 }

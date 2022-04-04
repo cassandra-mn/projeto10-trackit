@@ -1,17 +1,21 @@
 import { useContext } from 'react';
 import UserContext from '../contexts/UserContext';
 import styled from 'styled-components';
+import Calendar from 'react-calendar';
+import dayjs from 'dayjs';
 
 export default function TelaHistorico() {
     const {setVisivel} = useContext(UserContext);
     setVisivel(true);
 
+    function classe({date, view}) {
+        console.log(dayjs(date).format('DD/MM/YYYY'));
+    }
+
     return (
         <Container>
             <H1>Histórico</H1>
-            <Texto>
-                Em breve você poderá ver o histórico dos seus hábitos aqui!
-            </Texto>
+            <Calendario><Calendar calendarType='US' tileClassName={classe}/></Calendario>
         </Container>
     );
 }
@@ -28,12 +32,8 @@ const H1 = styled.h1`
     color: #126BA5;
 `;
 
-const Texto = styled.p`
-    margin-top: 28px;
-    left: 18px;
-    right: 20px;
-    font-size: 18px;
-    line-height: 22px;
-    position: absolute;
-    color: #666666;
+const Calendario = styled.div`
+    display: flex;
+    justify-content: center;
+    margin: 20px;
 `;
