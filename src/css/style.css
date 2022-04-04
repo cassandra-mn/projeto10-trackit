@@ -12,6 +12,7 @@ body {
 
 .react-calendar {
     min-width: 335px;
+    min-height: 300px;
     background: white;
     font-family: 'Lexend Deca', sans-serif;
     line-height: 1.125em;
